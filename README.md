@@ -1,2 +1,2 @@
-# JSCoder-Train
+# JSCoder-Training
 💪Do some javascript exercise
