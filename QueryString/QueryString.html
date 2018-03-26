@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Query String</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+
+</body>
+<script>
+    //获取单个参数
+    function getAllParams(){
+        var result = {};
+        var queryString = document.location.search;
+        queryString = queryString.substring(1);
+        var paramsArr =  queryString.match(/\w+=\w*/g);
+        if(paramsArr){
+            paramsArr.forEach((el) => {
+                el = el.split('=');
+                result[el[0]] = el[1];
+            })
+        }
+        return result;
+    }
+    console.log(getParams());
+</script>
+</html>
