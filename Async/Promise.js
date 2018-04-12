@@ -91,9 +91,9 @@ function SSPromise(func){
                         } else {
                             resolve(x);
                         }
-                        } catch (e) {
+                    } catch (e) {
                         reject(e);
-                        }
+                    }
                 });
                 self.onRejectedArr.push(function(value) {
                     try {

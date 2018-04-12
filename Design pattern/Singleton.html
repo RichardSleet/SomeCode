@@ -1,0 +1,29 @@
+<html>
+    <head>
+        
+    </head>
+    <body>
+        <button onClick="onClick()">点我</button>
+        <script>
+            var mask;
+            var createMask = function _createMask(){
+                if (mask) {
+                    return mask;
+                } else {
+                    mask = document.createElement('div');
+                    mask.setAttribute(
+                        'style',
+                        'background-color:red;' + 
+                        'border:1px solid black;' + 
+                        'width: 100px;' + 
+                        'height: 100px;'
+                    );
+                    return document.body.appendChild(mask);
+                }
+            }
+            var onClick = function _onClick(){
+                var mask = createMask();
+            }
+        </script>
+    </body>
+</html>
