@@ -43,3 +43,4 @@ emitter2.on('hi', (name, age) => {
   console.log(`I am ${name}, and I am ${age} years old`)
 })
 emitter2.emit('hi', 'Jerry', 12)
+
