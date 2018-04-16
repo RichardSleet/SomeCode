@@ -1,24 +1,24 @@
-// //throttle
-// const throttle = (fn, duration) => {
-//     let timer = null;
-//     function throttleFn (){
-//       if (!timer) {
-//         fn.apply(this, arguments);
-//         timer = setTimeout(()=>{
-//           clearTimeout(timer)
-//           timer = null
-//         }, duration);
-//       }
-//     }
-//     return throttleFn;
-// }
-// var throttleFn = throttle(function(){
-//     console.log('1');
-// }, 5000);
+//throttle
+const throttle = (fn, duration) => {
+    let timer = null;
+    function throttleFn (){
+      if (!timer) {
+        fn.apply(this, arguments);
+        timer = setTimeout(()=>{
+          clearTimeout(timer)
+          timer = null
+        }, duration);
+      }
+    }
+    return throttleFn;
+}
+var throttleFn = throttle(function(){
+    console.log('1');
+}, 5000);
 
-// setInterval(()=>{
-//     throttleFn();
-// }, 100);
+setInterval(()=>{
+    throttleFn();
+}, 100);
 
 //debounce
 const debounce = (fn, duration) => {

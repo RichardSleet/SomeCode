@@ -20,7 +20,6 @@ function quickSort(arr){
     }
     return arr;
 }
-console.log(quickSort([4, 6, 7, 3, 51, 34]));
 
 //冒泡排序
 function bubbleSort(arr) {
@@ -40,7 +39,6 @@ function bubbleSort(arr) {
         return '请你给我数组好么'
     }
 }
-console.log(bubbleSort([4, 6, 27, 3, 1, 34, 2, 1]));
 
 // 选择排序
 function selectSort(arr) {
@@ -60,8 +58,6 @@ function selectSort(arr) {
     }
     return arr;
 }
-console.log(selectSort([4, 6, 27, 3, 1, 34, 2, 1]));
-
 // 插入排序合集,直接插入排序
 function directInsertionSort(arr) {
     if (Array.isArray(arr)) {
@@ -84,4 +80,31 @@ function directInsertionSort(arr) {
         return '请你给我数组好么'
     }
 }
-console.log(directInsertionSort([6, 4, 27, 3, 1, 34, 2, 1]));
+
+
+//二分插入
+function binaryInsertionSort(arr) {
+    if (Array.isArray(arr)) {
+        for (let i = 1; i<arr.length; i++) {
+            var low = 0;
+            var high = i - 1;
+            var current = arr[i];
+            while (low < high) {
+                var mid = Math.floor((low + high)/2); 
+                if (current >= arr[mid]) {
+                    low = mid + 1;
+                } else {
+                    high = mid - 1;
+                }
+            }
+            for (let j = i-1; j>=low; j--) {
+                arr[j+1] = arr[j];
+            }
+            arr[low] = current;
+        }
+        return arr;
+    } else {
+        return '请你给我数组好么'
+    }
+}
+console.log(binaryInsertionSort([5,4,3,2,1]));
