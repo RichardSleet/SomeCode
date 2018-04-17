@@ -1,0 +1,38 @@
+<html>
+    <head>
+
+    </head>
+    <body>
+        <button onClick="onBack()"> 返回 </button>
+        <button onClick="goA()">跳转 A</button>
+    </body>
+    <script>
+        function Router(){
+            //路由配置
+            this.routes = {};
+            window.addEventListener('popstate', (e) => {
+                const path = e.state && e.state.path;
+                this.routes[path] && this.routes[path]();
+            });
+        }
+        Router.prototype.add = function _add(rn, cb){
+            this.routes[rn] = cb; 
+        }
+        Router.prototype.go =  function _go(num) {
+            window.history.go(num);
+        }
+        let router = new Router();
+        router.add('/a', ()=>{
+            console.log('跳转 a');
+        });
+        router.add('/b', ()=>{
+            console.log('跳转 b');
+        })
+        function onBack(){
+            history.go(-1);
+        }
+        function goA(){
+            history.pushState({},'','/a');
+        }
+    </script>
+</html>

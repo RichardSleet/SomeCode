@@ -1,0 +1,56 @@
+<html>
+    <head>
+
+    </head>
+    <body>
+        <button onclick="onBack()"> 返回 </button>
+    </body>
+    <script>
+        function Router(){
+            //路由配置
+            this.routerHistory = [];
+            this.routers = {};  
+            this.currentHashUrl = '';
+            this.currentIndex = -1;
+            this.isGo = false;
+            window.addEventListener('hashchange', (e)=>{
+                if(!this.isGo){
+                    this.currentHashUrl = window.location.hash.slice(1) || '/';
+                    this.routers[this.currentHashUrl][0]();
+                    this.routerHistory.push(this.currentHashUrl);
+                    this.currentIndex++;
+                }
+                this.isGo = false;
+            });
+        }
+        Router.prototype.add = function _add(rn, cb){
+            if(!this.routers[rn]){
+                this.routers[rn] = [];
+            }
+            this.routers[rn].push(cb);
+        }
+        Router.prototype.go = function _go(num){
+            var currentIndex = this.currentIndex + num;
+            if(currentIndex >=0){
+                this.currentIndex = currentIndex;
+                window.location.hash = `#${this.routerHistory[this.currentIndex]}`;
+                this.routers[this.routerHistory[this.currentIndex]][0]();
+                this.isGo = true;
+            }
+        }
+        let router = new Router();
+        router.add('/a', function(){
+            let a = document.createElement('a');
+            a.textContent = '跳转a 页面';
+            document.body.appendChild(a);
+        });
+        router.add('/b', function(){
+            let a = document.createElement('a');
+            a.textContent = '跳转b 页面';
+            document.body.appendChild(a);
+        });
+        function onBack(){
+            router.go(-1);
+        }
+    </script>
+</html>
