@@ -2,28 +2,31 @@
  * async/await 的异步请求使用 generator 和 promise 模拟实现
  * 题目来源于 http://scriptoj.mangojuice.top/problems/72
  */
-const wrapAsync = (generatorFn) => {
+const wrapAsync = function _wrapAsync(generatorFn){
     var _generatorFn = generatorFn;
-    const resultFn = function _resultFn(){
+    var _iterator;
+    var run = function _run(){
+        _iterator = _generatorFn(...arguments);
         var self = this;
-        _generatorFn = _generatorFn.call(this, ...arguments);
-        return new Promise((resolve, reject) => {
-            const nextFn = function _nextFn(data) {
-                var nextGenerator = _generatorFn.next(data);
-                if (!nextGenerator.done) {
-                    return nextGenerator.value.then((newData) => {
-                        return _nextFn.call(self, newData);
-                    });
+        return new Promise((resolve, reject)=>{
+            var co = function _co(data){
+                var result = _iterator.next(data);
+                if (result.done) {
+                    //完成的情况下
+                    return resolve(result.value);
                 } else {
-                    resolve(nextGenerator.value);
+                    //未完成的情况下,继续迭代
+                    return result.value.then((data)=>{
+                        _co(data);
+                    });
                 }
             };
-            return _generatorFn.next().value.then((data) => {
-                return nextFn.call(self, data);
+            return _iterator.next().value.then((data)=>{
+                co(data);
             });
-        });
+        })
     }
-    return resultFn;
+    return run;
 }
 
 const getData = (name) => {
