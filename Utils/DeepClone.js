@@ -17,7 +17,7 @@ function deepClone(source){
   //遍历可枚举的属性
   var keys = Object.keys(source);
   keys.forEach((item)=>{
-    if(source.hasOwnProperty(item)){
+    if (source.hasOwnProperty(item)) {
       if(source[item] && typeof source[item] === 'object'){
         //是一个对象
         targetObj[item] = source[item].constructor === Array ? [] : {};
