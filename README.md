@@ -1,2 +1,1 @@
-# CodePractice
-💪Do some javascript exercise
+# Some Code
