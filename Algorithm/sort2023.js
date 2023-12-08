@@ -91,7 +91,7 @@ const quickSort = (targetArr) => {
             return targetArr;
         }
         const midIndex = Math.floor(targetArr.length / 2);
-        const midNumber = targetArr.splice(midIndex, 1);
+        const midNumber = targetArr.splice(midIndex, 1)[0];
         const leftArr = [];
         const rightArr = [];
         targetArr.forEach(item => {
@@ -102,7 +102,7 @@ const quickSort = (targetArr) => {
     return quickSortInner(targetArr)
 }
 
-const targetArr = [5, 1];
+const targetArr = [57, 1, 2, 4, 56, 1];
 
 console.log(bubbleSort(targetArr));
 console.log(selectSort(targetArr));
