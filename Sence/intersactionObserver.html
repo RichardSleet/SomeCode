@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IntersectionObserver Example</title>
+    <style>
+        .box {
+            width: 100%;
+            height: 100px;
+            background-color: lightblue;
+            margin: 100px 0;
+        }
+
+        .scroll-box {
+            width: 100%;
+            height: 700px;
+            background-color: red;
+            position: absolute;
+            top: 0px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="box" id="box1">Box 1</div>
+    <div class="box" id="box2">Box 2</div>
+    <div class="box" id="box3">Box 3</div>
+    <div class="scroll-box"></div>
+    <script>
+        // 创建一个 IntersectionObserver 实例
+        let observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                // 每个 entry 都是一个 IntersectionObserverEntry 对象
+                if (entry.isIntersecting) {
+                    // 当元素进入视口时触发
+                    entry.target.style.backgroundColor = 'lightgreen';
+                    console.log(entry.target.id + " is in viewport!");
+                    // 你可以选择停止观察某个元素
+                    // observer.unobserve(entry.target);
+                } else {
+                    // 当元素离开视口时触发
+                    entry.target.style.backgroundColor = 'lightblue';
+                }
+            });
+        }, {
+            root: null, // 使用浏览器视窗作为根元素
+            rootMargin: '0px', // 根元素的外边距
+            threshold: 0.5 // 目标元素有50%进入根元素时触发回调
+        });
+
+        const scrollBox = document.querySelector('.scroll-box');
+        window.setInterval(() => {
+            let height = scrollBox.getBoundingClientRect().height;
+            scrollBox.style.height = `${height - 10}px`;
+        }, 100);
+
+
+        // 观察多个元素
+        document.querySelectorAll('.box').forEach(box => {
+            observer.observe(box);
+        });
+    </script>
+
+</body>
+
+</html>

@@ -1,11 +1,12 @@
 function type(any) {
     if (typeof any === 'undefined') {
-        console.log(1)
         return typeof any;
     }
     if (any === null) {
-        console.log(2)
         return 'null';
+    }
+    if (Array.isArray(any)) {
+        return 'array';
     }
     return any.constructor.name.toString();
 }
